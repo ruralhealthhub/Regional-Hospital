@@ -233,6 +233,48 @@
   .est-assump ul{margin:0 0 12px;padding-left:18px;}
   .est-assump li{margin-bottom:9px;line-height:1.5;}
   .est-assump .src{font-size:.78rem;color:var(--muted);margin:0;}
+
+  /* ---------- SUBSCRIPTION CALCULATOR ---------- */
+  .sub-calc{margin-top:38px;border:2px solid var(--ink);border-radius:var(--radius);overflow:hidden;}
+  .sub-head{background:linear-gradient(120deg,var(--red-dk),var(--navy));color:#fff;padding:22px 26px;}
+  .sub-head h3{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.4rem;margin:0;color:#fff;}
+  .sub-head p{margin:6px 0 0;font-size:.9rem;color:#cfcfcf;max-width:62ch;}
+  .sub-body{display:grid;grid-template-columns:1.1fr .9fr;gap:0;}
+  .sub-inputs{padding:26px;border-right:2px solid var(--ink);}
+  .sub-out{padding:26px;background:var(--soft);display:flex;flex-direction:column;justify-content:flex-start;}
+  .sub-field{margin-bottom:19px;}
+  .sub-field:last-child{margin-bottom:0;}
+  .sub-field label{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:.9rem;margin-bottom:8px;}
+  .sub-field label .val{color:var(--red-dk);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .sub-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:.95rem;}
+  .sub-row span{color:#3a3a3a;}
+  .sub-row b{font-variant-numeric:tabular-nums;color:var(--ink);}
+  .sub-row.discount b{color:var(--green-dk);}
+  .sub-total{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-top:14px;padding-top:14px;border-top:2px solid var(--ink);}
+  .sub-total .st-l{font-family:"Bricolage Grotesque";font-weight:700;font-size:.95rem;}
+  .sub-total .st-v{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.5rem;color:var(--red-dk);font-variant-numeric:tabular-nums;}
+  input[type=range].red::-webkit-slider-thumb{background:var(--red);}
+  input[type=range].red::-moz-range-thumb{background:var(--red);}
+  .sub-note{font-size:.82rem;color:var(--muted);margin:14px 0 0;font-style:italic;}
+
+  /* ---------- NET RESULT ---------- */
+  .net-result{margin-top:38px;border:2px solid var(--ink);border-radius:var(--radius);overflow:hidden;}
+  .net-head{background:var(--ink);color:#fff;padding:22px 26px;}
+  .net-head h3{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.4rem;margin:0;color:#fff;}
+  .net-head p{margin:6px 0 0;font-size:.9rem;color:#aaa;max-width:62ch;}
+  .net-body{padding:26px;background:#fff;}
+  .net-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;font-size:1.05rem;border-bottom:1.5px solid var(--hair);}
+  .net-row:last-child{border-bottom:none;}
+  .net-row span{color:#3a3a3a;font-weight:500;}
+  .net-row b{font-variant-numeric:tabular-nums;color:var(--ink);font-size:1.1rem;}
+  .net-row.rev b{color:var(--navy);}
+  .net-row.cost b{color:var(--red-dk);}
+  .net-total{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-top:4px;padding:18px 0 0;border-top:2.5px solid var(--ink);}
+  .net-total .nt-l{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.15rem;}
+  .net-total .nt-v{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.8rem;font-variant-numeric:tabular-nums;}
+  .net-total .nt-v.positive{color:var(--green-dk);}
+  .net-total .nt-v.negative{color:var(--red-dk);}
+  .net-roi{margin-top:10px;text-align:right;font-size:.88rem;color:var(--muted);font-weight:600;}
   .vol-tbl{margin:4px 0 14px;border-top:1.5px solid var(--hair);}
   .vol-tbl .vrow{display:grid;grid-template-columns:1fr 70px 96px;gap:8px;padding:7px 0;border-bottom:1px solid #ece6da;font-size:.82rem;}
   .vol-tbl .vrow.h{font-family:"Bricolage Grotesque";font-weight:700;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:none;}
@@ -278,6 +320,8 @@
     .grid.two,.grid.three{grid-template-columns:1fr;}
     .est-body{grid-template-columns:1fr;}
     .est-inputs{border-right:none;border-bottom:2px solid var(--ink);}
+    .sub-body{grid-template-columns:1fr;}
+    .sub-inputs{border-right:none;border-bottom:2px solid var(--ink);}
     .edge{grid-template-columns:1fr;}
     .pw-body{flex-direction:column;}
     .pw-node .nlabel{font-size:.74rem;}
@@ -533,6 +577,50 @@
           <p class="src">Rates vary by age mix, payer, and region. These are directional planning estimates of the downstream care, and revenue, a coordinated network helps connect from this population &mdash; not a guarantee. &ldquo;Share connected&rdquo; reflects that reach today is limited by physician bandwidth; a coordinated network helps the regional center support more of this population without adding staff.</p>
         </div>
       </div>
+
+      <!-- ===== SUBSCRIPTION COST CALCULATOR ===== -->
+      <div class="sub-calc reveal">
+        <div class="sub-head">
+          <h3>Subscription cost calculator</h3>
+          <p>Estimate the monthly and annual cost of the Rural Health Hub subscription based on your hospital count and departments per hospital.</p>
+        </div>
+        <div class="sub-body">
+          <div class="sub-inputs">
+            <p class="est-sub first" style="color:var(--red-dk)">Hospital subscription</p>
+            <div class="sub-field"><label>Number of hospitals <span class="val" id="v-hosp">1</span></label><input class="red" type="range" id="i-hosp" min="1" max="20" step="1" value="1"></div>
+            <div class="sub-field"><label>Departments per hospital <span class="val" id="v-dept">5</span></label><input class="red" type="range" id="i-dept" min="1" max="30" step="1" value="5"></div>
+            <p class="sub-note">Base rate: $20,000 / month per hospital &plus; $5,000 / month per department. A 30% all-department discount is applied automatically.</p>
+          </div>
+          <div class="sub-out">
+            <span class="out-label">Subscription cost</span>
+            <div class="out-big" id="o-sub-total" style="color:var(--red-dk)">$0</div>
+            <p class="out-sub">estimated annual subscription cost for the configuration entered</p>
+
+            <div class="out-group">
+              <div class="gh" style="color:var(--red-dk)">Monthly breakdown</div>
+              <div class="sub-row"><span>Hospital base fee</span><b id="o-hosp-fee">$0</b></div>
+              <div class="sub-row"><span>Department fees <em id="o-dept-count" style="font-style:normal;color:var(--muted)"></em></span><b id="o-dept-fee">$0</b></div>
+              <div class="sub-row discount"><span>30% all-department discount</span><b id="o-discount">−$0</b></div>
+            </div>
+            <div class="sub-total"><span class="st-l">Monthly total</span><span class="st-v" id="o-monthly">$0</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== NET RESULT: REVENUE vs COST ===== -->
+      <div class="net-result reveal">
+        <div class="net-head">
+          <h3>Net result &mdash; revenue generated vs. subscription cost</h3>
+          <p>How the estimated annual network impact compares to the annual subscription cost.</p>
+        </div>
+        <div class="net-body">
+          <div class="net-row rev"><span>Estimated annual revenue impact</span><b id="o-net-rev">$0</b></div>
+          <div class="net-row cost"><span>Annual subscription cost</span><b id="o-net-cost">$0</b></div>
+          <div class="net-total"><span class="nt-l">Net annual result</span><span class="nt-v" id="o-net-total">$0</span></div>
+          <div class="net-roi" id="o-net-roi"></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -742,6 +830,7 @@
     var readCost=readm*cost;
 
     var total=capTotal+savings;
+    window._revTotal = total;
 
     set('o-img', money(capImg));
     set('o-proc', money(capProc));
@@ -757,6 +846,71 @@
     document.getElementById(id).addEventListener('input', calc);
   });
   calc();
+
+  /* ----- Subscription calculator ----- */
+  var HOSP_BASE = 20000;   // $20,000/month per hospital
+  var DEPT_RATE = 5000;    // $5,000/month per department
+  var DEPT_DISC = 0.30;    // 30% all-department discount
+
+  function calcSub(){
+    var hosps = +document.getElementById('i-hosp').value;
+    var depts = +document.getElementById('i-dept').value;
+    var totalDepts = hosps * depts;
+
+    document.getElementById('v-hosp').textContent = hosps;
+    document.getElementById('v-dept').textContent = depts;
+
+    var hospFee = hosps * HOSP_BASE;
+    var deptFee = totalDepts * DEPT_RATE;
+    var discount = deptFee * DEPT_DISC;
+    var monthly = hospFee + deptFee - discount;
+    var annual = monthly * 12;
+
+    document.getElementById('o-hosp-fee').textContent = fullMoney(hospFee);
+    document.getElementById('o-dept-fee').textContent = fullMoney(deptFee);
+    document.getElementById('o-dept-count').textContent = '(' + totalDepts + ' total)';
+    document.getElementById('o-discount').textContent = '\u2212' + fullMoney(discount);
+    document.getElementById('o-monthly').textContent = fullMoney(monthly);
+    document.getElementById('o-sub-total').textContent = money(annual) + ' / yr';
+
+    calcNet(annual);
+  }
+
+  function calcNet(subAnnual){
+    var revNum = window._revTotal || 0;
+
+    document.getElementById('o-net-rev').textContent = money(revNum);
+    document.getElementById('o-net-cost').textContent = money(subAnnual);
+
+    var net = revNum - subAnnual;
+    var netEl = document.getElementById('o-net-total');
+    if(net >= 0){
+      netEl.textContent = '+' + money(net);
+      netEl.className = 'nt-v positive';
+    } else {
+      netEl.textContent = '\u2212' + money(Math.abs(net));
+      netEl.className = 'nt-v negative';
+    }
+
+    var roiEl = document.getElementById('o-net-roi');
+    if(subAnnual > 0){
+      var roi = ((revNum / subAnnual)).toFixed(1);
+      roiEl.textContent = roi + 'x return on subscription cost';
+    } else {
+      roiEl.textContent = '';
+    }
+  }
+
+  ['i-hosp','i-dept'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calcSub);
+  });
+  /* also recalculate net when revenue sliders change */
+  ['i-pop','i-cap','i-base','i-red','i-cost'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', function(){
+      calcSub();
+    });
+  });
+  calcSub();
 
   /* assumptions dropdown */
   var assumpBtn=document.getElementById('assumpBtn');
